@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    "outDir": "C:\\tmp\\dvkiin-material-common",
+    "outDir": "../../node_modules/dvkiin-material-commons",
     "sourceMap": false,
     "declaration": true,
     "emitDeclarationOnly": true

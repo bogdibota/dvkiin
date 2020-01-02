@@ -24,6 +24,24 @@ Therefor we have the following `peerDependencies`:
 
 Documentation and examples are hosted [here](https://material-commons.dvkiin.xyz/).
 
+### Develop
+
+Install dev dependencies
+```
+yarn
+```
+
+Start in dev mode
+```
+yarn start
+```
+
+Start the playground
+```
+cd ../playground
+yarn && yarn start
+```
+
 ### Licence
 
 MIT

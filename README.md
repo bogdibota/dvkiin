@@ -6,6 +6,10 @@ Welcome to the DVKIIN ☂ Project!
 
 This is basically a collection of code snippets that I happened to use again and again.
 
+## Docs
+
+Docs are currently listed [here](https://material-commons.dvkiin.xyz).
+
 ## What does it contain?
 
 ### @dvkiin/commons
@@ -28,3 +32,9 @@ This package help you:
  - easily integrate it with Apollo Client
 
 Full README [here](./material-commons).
+
+### DVKIIN Playground
+
+A webapp containing examples used to develop the `@dvkiin/material-commons` package.
+
+Full README [here](./playground).
