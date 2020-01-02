@@ -1,4 +1,4 @@
-/node_modules
--/node_modules/.DO_NOT_DELETE
+/node_modules/*
+!/node_modules/.DO_NOT_DELETE
 
 /.idea
