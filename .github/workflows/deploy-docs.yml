@@ -1,0 +1,37 @@
+name: deploy docs
+
+on:
+  push:
+    branches:    
+    - master
+    paths:
+    - 'docs/**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          
+      - name: Install dependencies
+        working-directory: docs
+        run: yarn install
+      
+      - name: Build Gatsby
+        working-directory: docs
+        run: yarn build
+     
+      - uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          # "gatsby build" creates "public" folder, which is what we are deploying
+          args: deploy --dir=docs/public --prod
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
