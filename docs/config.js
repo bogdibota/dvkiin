@@ -2,7 +2,7 @@ const config = {
   'gatsby': {
     'pathPrefix': '/',
     'siteUrl': 'https://dvkiin.xyz',
-    'gaTrackingId': 'UA-40939202-5',
+    'gaTrackingId': 'UA-40939202-6',
   },
   'header': {
     'logoLink': '/',

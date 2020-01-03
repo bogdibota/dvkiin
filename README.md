@@ -8,7 +8,9 @@ This is basically a collection of code snippets that I happened to use again and
 
 ## Docs
 
-Docs are currently listed [here](https://material-commons.dvkiin.xyz).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c867302c-2b71-4998-aade-b06bf4f801e9/deploy-status)](https://app.netlify.com/sites/dvkiin/deploys)
+
+Docs are currently listed on **[dvkiin.xyz](https://dvkiin.xyz)**.
 
 ## What does it contain?
 
