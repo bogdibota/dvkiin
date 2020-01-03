@@ -1,14 +1,13 @@
 const config = {
   'gatsby': {
     'pathPrefix': '/',
-    'siteUrl': 'https://material-commons.dvkiin.xyz',
+    'siteUrl': 'https://dvkiin.xyz',
     'gaTrackingId': 'UA-40939202-5',
   },
   'header': {
-    'logo': 'https://optioffer.com/wp-content/uploads/2019/10/android-chrome-512x512-1.png',
     'logoLink': '/',
-    'title': '@dvkiin/material-commons',
-    'githubUrl': 'https://github.com/bogdibota/material-commons',
+    'title': 'DVKIIN ☂ Project',
+    'githubUrl': 'https://github.com/bogdibota/dvkiin',
     'helpUrl': '',
     'tweetText': '',
     'links': [
@@ -32,18 +31,17 @@ const config = {
     ],
     'links': [
       { 'text': 'OptiOffer', 'link': 'https://optioffer.com' },
-      { 'text': 'Github', 'link': 'https://github.com/bogdibota/material-commons' },
-      { 'text': 'Issues', 'link': 'https://github.com/bogdibota/material-commons/issues' },
+      { 'text': 'Github', 'link': 'https://github.com/bogdibota/dvkiin' },
+      { 'text': 'Issues', 'link': 'https://github.com/bogdibota/dvkiin/issues' },
     ],
     'frontline': false,
     'ignoreIndex': true,
   },
   'siteMetadata': {
-    'title': 'Docs: @dvkiin/material-commons | OptiOffer',
-    'description': 'Documentation and code examples for @dvkiin/material-commons lib. Powered by optioffer.com',
+    'title': 'DVKIIN Project',
+    'description': 'Documentation and code examples for the @dvkiin/* packages. Powered by optioffer.com',
     'ogImage': null,
-    'docsLocation': 'https://github.com/bogdibota/material-commons/tree/master/docs/content',
-    'favicon': 'https://optioffer.com/wp-content/uploads/2019/10/cropped-Favicon-192x192.png',
+    'docsLocation': 'https://github.com/bogdibota/dvkiin/tree/master/docs/content',
   },
 };
 

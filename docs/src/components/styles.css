@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
+/*
+normal #2196F3
+dark   #0069c0
+light  #6ec6ff
+*/
+
 body {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
 }
 
 .video-responsive {
@@ -65,7 +71,7 @@ body {
 }
 
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-  background-color: #03ddd2;
+  background-color: #2196F3;
 }
 
 .headerWrapper {
@@ -172,17 +178,17 @@ body {
 
 /* Header section starts here */
 .navBarDefault {
-  background-color: #00aaa1;
+  background-color: #2196F3;
   border-radius: 0;
   border-top: 0;
   margin-bottom: 0;
   border: 0;
   display: flex;
   align-items: center;
-  box-shadow: -1px 0px 4px 1px rgba(104, 255, 255, .4);
-  -webkit-box-shadow: -1px 0px 4px 1px rgba(104, 255, 255, .4);
-  -moz-box-shadow: -1px 0px 4px 1px rgba(104, 255, 255, .8);
-  -o-box-shadow: -1px 0px 4px 1px rgba(104, 255, 255, .4);
+  box-shadow: -1px 0px 4px 1px rgba(33, 150, 243, .4);
+  -webkit-box-shadow: -1px 0px 4px 1px rgba(33, 150, 243, .4);
+  -moz-box-shadow: -1px 0px 4px 1px rgba(33, 150, 243, .8);
+  -o-box-shadow: -1px 0px 4px 1px rgba(33, 150, 243, .4);
   z-index: 1;
   padding: 15px;
 }
@@ -204,8 +210,6 @@ body {
 }
 
 .navBarBrand img {
-  background-color: white;
-  border-radius: 50%;
   width: 50px;
   margin: -10px 16px -10px 0;
   display: inline-block;
@@ -261,14 +265,14 @@ pre {
 .headerNav {
   font-family: 'Roboto';
   padding: 0px 24px;
-  color: rgb(104, 255, 255);
+  color: #2196F3;
   font-size: 16px;
   font-weight: 500;
   line-height: 1em;
 }
 
 .headerNav a {
-  color: rgb(104, 255, 255);
+  color: #2196F3;
   text-decoration: none;
 }
 
@@ -342,7 +346,7 @@ pre {
 }
 
 .hideFrontLine .active > a {
-  background-color: #03ddd2;
+  background-color: #0069c0;
   color: #fff !important;
 }
 
@@ -351,7 +355,7 @@ pre {
 }
 
 .active .collapser > svg > path {
-  fill: #03ddd2 !important;
+  fill: #0069c0 !important;
 }
 
 .firstLevel ul .item ul .item {
@@ -374,17 +378,17 @@ pre {
 }
 
 .sideBarUL .item > a:hover {
-  background-color: #03ddd2;
+  background-color: #0069c0;
   color: #fff !important;
 }
 
 .showFrontLine .item > a:hover {
-  background-color: #03ddd2;
+  background-color: #0069c0;
 }
 
 .showFrontLine .active > a {
   color: #fff;
-  background-color: #00aaa1;
+  background-color: #0069c0;
 }
 
 .sideBarUL .item .item {
@@ -406,7 +410,7 @@ pre {
   border-color: rgb(230, 236, 241) !important;
   border-style: solid none solid solid;
   border-width: 1px 0px 1px 1px;
-  background-color: #03ddd2;
+  background-color: #2196F3;
   color: #fff;
 }
 
@@ -423,11 +427,10 @@ pre {
   font-size: 32px;
   line-height: 1.5;
   font-weight: 500;
-  border-left: 2px solid rgb(104, 255, 255);
-  padding: 0 16px;
+  border-left: 2px solid #2196F3;
   flex: 1;
   margin-top: 0;
-  padding-top: 0;
+  padding: 0 16px;
 }
 
 .gitBtn {
@@ -549,7 +552,6 @@ pre {
   font-size: 24px;
   transition: color 200ms ease 0s;
   padding: 16px;
-  padding-left: 16px;
   display: block;
   margin: 0px;
   color: rgb(157, 170, 182);
@@ -563,13 +565,13 @@ pre {
 }
 
 .nextBtn:hover, .previousBtn:hover {
-  color: rgb(104, 255, 255);
+  color: #2196F3;
   text-decoration: none;
-  border: 1px solid rgb(104, 255, 255);
+  border: 1px solid #2196F3;
 }
 
 .nextBtn:hover .rightArrow, .previousBtn:hover .leftArrow {
-  color: rgb(104, 255, 255);
+  color: #2196F3;
 }
 
 /* tables.css */
@@ -623,8 +625,7 @@ img {
   display: flex;
   align-items: center;
   font-size: 16px;
-  padding: 10px 0px;
-  padding-left: 15px;
+  padding: 10px 0px 10px 15px;
 }
 
 .githubBtn span span {
@@ -724,8 +725,7 @@ img {
 
   .navBarBrand {
     font-size: 20px;
-    padding: 15px;
-    padding-left: 0;
+    padding: 15px 15px 15px 0;
     flex: 1;
   }
 
@@ -761,8 +761,7 @@ img {
   }
 
   .searchWrapper {
-    padding: 10px 0;
-    padding-top: 20px;
+    padding: 20px 0 10px;
   }
 
   .hitWrapper {

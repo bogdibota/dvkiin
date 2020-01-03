@@ -9,7 +9,7 @@ import Sidebar from './sidebar';
 import './styles.css';
 
 const help = require('./images/help.svg');
-const isSearchEnabled = config.header.search && config.header.search.enabled ? true : false;
+const isSearchEnabled = !!(config.header.search && config.header.search.enabled);
 
 let searchIndices = [];
 if (isSearchEnabled && config.header.search.indexName) {
@@ -31,7 +31,6 @@ const Header = ({ location }) => (
               tweetText
               logo {
                 link
-                image
               }
               headerLinks {
                 link
@@ -62,35 +61,37 @@ const Header = ({ location }) => (
           <nav className={ 'navbar navbar-default navBarDefault' }>
             <div className={ 'navbar-header navBarHeader' }>
               <Link to={ finalLogoLink } className={ 'navbar-brand navBarBrand' }>
-                { logo.image !== '' ?
-                  (<img className={ 'img-responsive' } src={ logo.image } alt={ 'logo' }/>)
-                  :
-                  (<img className={ 'img-responsive' } src={ logoImg } alt={ 'logo' }/>)
-                }
+                <img className={ 'img-responsive' } src={ logoImg } alt="dvkiin logo"/>
                 <div className={ 'headerTitle' } dangerouslySetInnerHTML={ { __html: headerTitle } }/>
               </Link>
               <button type="button" className={ 'navbar-toggle collapsed navBarToggle' } data-toggle="collapse"
                       data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span className={ 'sr-only' }>Toggle navigation</span>
-                <span className={ 'icon-bar' }></span>
-                <span className={ 'icon-bar' }></span>
-                <span className={ 'icon-bar' }></span>
+                <span className={ 'icon-bar' }/>
+                <span className={ 'icon-bar' }/>
+                <span className={ 'icon-bar' }/>
               </button>
             </div>
-            { isSearchEnabled ? (
-              <div className={ 'searchWrapper hidden-xs navBarUL' }>
-                <Search collapse indices={ searchIndices }/>
-              </div>
-            ) : null }
+            { isSearchEnabled
+              ? (
+                <div className={ 'searchWrapper hidden-xs navBarUL' }>
+                  <Search collapse indices={ searchIndices }/>
+                </div>
+              )
+              : null
+            }
             <div id="navbar" className={ 'navbar-collapse collapse navBarCollapse' }>
               <div className={ 'visible-xs' }>
                 <Sidebar location={ location }/>
                 <hr/>
-                { isSearchEnabled ? (
-                  <div className={ 'searchWrapper navBarUL' }>
-                    <Search collapse indices={ searchIndices }/>
-                  </div>
-                ) : null }
+                { isSearchEnabled
+                  ? (
+                    <div className={ 'searchWrapper navBarUL' }>
+                      <Search collapse indices={ searchIndices }/>
+                    </div>
+                  )
+                  : null
+                }
               </div>
               <ul className={ 'nav navbar-nav navBarUL navBarNav navbar-right navBarULRight' }>
                 { headerLinks.map((link, key) => {
@@ -101,25 +102,36 @@ const Header = ({ location }) => (
                       </li>
                     );
                   }
-                }) }
-                { helpUrl !== '' ?
-                  (<li><a href={ helpUrl }><img src={ help } alt={ 'Help icon' }/></a></li>) : null
+                })
                 }
-                { (tweetText !== '' || githubUrl !== '') ?
-                  (<li className="divider hidden-xs"></li>) : null
+                { helpUrl !== ''
+                  ? (<li><a href={ helpUrl }><img src={ help } alt={ 'Help icon' }/></a></li>)
+                  : null
                 }
-                { tweetText !== '' ?
-                  (<li>
-                    <a href={ 'https://twitter.com/intent/tweet?&text=' + tweetText } target="_blank">
-                      <img className={ 'shareIcon' } src={ twitter } alt={ 'Twitter' }/>
-                    </a>
-                  </li>) : null
+                { (tweetText !== '' || githubUrl !== '')
+                  ? (<li className="divider hidden-xs"/>)
+                  : null
                 }
-                { githubUrl !== '' ?
-                  (<li className={ 'githubBtn' }>
-                    <GitHubButton href={ githubUrl } data-show-count="true"
-                                  aria-label="Star on GitHub">Star</GitHubButton>
-                  </li>) : null }
+                { tweetText !== ''
+                  ? (
+                    <li>
+                      <a href={ 'https://twitter.com/intent/tweet?&text=' + tweetText } target="_blank">
+                        <img className={ 'shareIcon' } src={ twitter } alt={ 'Twitter' }/>
+                      </a>
+                    </li>
+                  )
+                  : null
+                }
+                { githubUrl !== ''
+                  ? (
+                    <li className={ 'githubBtn' }>
+                      <GitHubButton href={ githubUrl } data-show-count="true" aria-label="Star on GitHub">
+                        Star
+                      </GitHubButton>
+                    </li>
+                  )
+                  : null
+                }
               </ul>
             </div>
           </nav>

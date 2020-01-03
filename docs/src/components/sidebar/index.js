@@ -48,8 +48,6 @@ const ListItem = styled(({ className, active, level, ...props }) => {
 
 const Sidebar = styled('aside')`
   width: 100%;
-  /* background-color: rgb(245, 247, 249); */
-  /* border-right: 1px solid #ede7f3; */
   height: 100vh;
   overflow: auto;
   position: fixed;
@@ -59,22 +57,22 @@ const Sidebar = styled('aside')`
   position: sticky;
   top: 0;
   padding-right: 0;
-  background-color: #00aaa1;
+  background-color: #2196F3;
   /* Safari 4-5, Chrome 1-9 */
-  background: linear-gradient(#00aaa1, #03ddd2);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#00aaa1), to(#03ddd2));
+  background: linear-gradient(#2196F3, #6ec6ff);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2196F3), to(#6ec6ff));
   /* Safari 5.1, Chrome 10+ */
-  background: -webkit-linear-gradient(top, #00aaa1, #03ddd2);
+  background: -webkit-linear-gradient(top, #2196F3, #6ec6ff);
   /* Firefox 3.6+ */
-  background: -moz-linear-gradient(top, #00aaa1, #03ddd2);
+  background: -moz-linear-gradient(top, #2196F3, #6ec6ff);
   /* IE 10 */
-  background: -ms-linear-gradient(top, #00aaa1, #03ddd2);
+  background: -ms-linear-gradient(top, #2196F3, #6ec6ff);
   /* Opera 11.10+ */
-  background: -o-linear-gradient(top, #00aaa1, #03ddd2);
+  background: -o-linear-gradient(top, #2196F3, #6ec6ff);
   @media only screen and (max-width: 767px) {
     padding-left: 0px;
-    background-color: #00aaa1;
-    background: #00aaa1;
+    background-color: #2196F3;
+    background: #2196F3;
   }
   @media (min-width: 767px) and (max-width:1023px)
   {
