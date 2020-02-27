@@ -27,7 +27,7 @@ const InputFile: FC<DVKFileField & PropsWithErrorManagement> = ({
                                                                 }) => {
   const { obj, updateProperty } = useContext(FormContext);
   const classes = useStyles();
-  const [selectedFileName, setSelectedFileName] = useState(deepGet(obj, `${ name }.fileName`, ''));
+  const [ selectedFileName, setSelectedFileName ] = useState(deepGet(obj, `${ name }.fileName`, ''));
 
   function onFileSelected({ target: { files } }: ChangeEvent<HTMLInputElement>) {
     if (!files) return;
@@ -55,13 +55,12 @@ const InputFile: FC<DVKFileField & PropsWithErrorManagement> = ({
     />
     <label htmlFor={ `${ name }-hidden` }>
       <FormControl fullWidth margin="dense">
-        <InputLabel htmlFor={ name } error={ hasError }>{ label }</InputLabel>
+        <InputLabel htmlFor={ name } error={ hasError }>{ label + (required ? ' *' : '') }</InputLabel>
         <Input
           id={ name }
           type="text"
           disabled={ disabled }
           required={ required }
-
 
           value={ selectedFileName }
 

@@ -1,15 +1,16 @@
-import { DVKForm } from '@dvkiin/material-commons';
+import { DVKForm, DVKObject } from '@dvkiin/material-commons';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import React, { FC, useMemo, useState } from 'react';
+
 import useStyles from '../styles';
 
 const FormSection: FC = () => {
   const { card, pre, leftForm } = useStyles();
 
-  const [submittedEmpty, submitEmpty] = useState();
-  const [submittedDefaulted, submitDefaulted] = useState();
-  const [changedEmpty, changeEmpty] = useState();
-  const [changedDefaulted, changeDefaulted] = useState();
+  const [ submittedEmpty, submitEmpty ] = useState<DVKObject>();
+  const [ submittedDefaulted, submitDefaulted ] = useState<DVKObject>();
+  const [ changedEmpty, changeEmpty ] = useState<DVKObject>();
+  const [ changedDefaulted, changeDefaulted ] = useState<DVKObject>();
 
   const defaultValue = useMemo(() => ({
     id: 123,
@@ -105,6 +106,7 @@ const FormSection: FC = () => {
         fields={ [
           {
             name: 'id', label: 'numeric id', type: 'number', autoFocus: true,
+            required: true,
             infoModal: {
               message: 'Here you should provide your id.',
               title: 'ID TITLE',
@@ -131,7 +133,8 @@ const FormSection: FC = () => {
             name: 'location',
             label: 'Location',
             type: 'select',
-            values: [{ label: 'Romania', name: '1' }, { label: 'Not Romania', name: '2' }],
+            required: true,
+            values: [ { label: 'Romania', name: '1' }, { label: 'Not Romania', name: '2' } ],
             infoModal: {
               message: 'Here you should provide your location.',
               title: 'LOCATIONNN',
@@ -174,7 +177,6 @@ const FormSection: FC = () => {
       <Typography>Changed value</Typography>
       <pre className={ pre }>{ JSON.stringify(changedDefaulted) }</pre>
     </Paper>
-
   </Grid>;
 };
 

@@ -42,3 +42,21 @@ export function d(value: any): any {
     return value;
   }
 }
+
+export function lett<TIn, TOut>(value: TIn | undefined | null, closure: (it: TIn) => TOut): TOut | undefined | null {
+  if (value === undefined || value === null) return value as undefined | null;
+  return closure(value);
+}
+
+type DebounceableFunction = (...args: any[]) => void
+
+export function debounce(callback: DebounceableFunction, time: number): DebounceableFunction {
+  let interval: number | null;
+  return (...args: any) => {
+    interval && clearTimeout(interval);
+    interval = setTimeout(() => {
+      interval = null;
+      callback(...args);
+    }, time);
+  };
+}

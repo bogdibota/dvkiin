@@ -1,6 +1,11 @@
 import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { ReactNode } from 'react';
 
-export type DVKValue = string | number | DVKObject | DVKListItem[]
+export type DVKValue = string
+  | number
+  | string[]
+  | DVKObject
+  | DVKListItem[]
 
 export type DVKObject = {
   [key: string]: DVKValue
@@ -41,6 +46,7 @@ export type DVKFieldMashed = DVKField
   & DVKFileField
   & DVKCheckboxField
   & DVKHiddenField
+  & DVKComboBoxField
 
 export type DVKFieldType = DVKDateTimeType
   | DVKListType
@@ -50,6 +56,7 @@ export type DVKFieldType = DVKDateTimeType
   | DVKFileType
   | DVKCheckboxType
   | DVKHiddenType
+  | DVKComboBoxType
 
 export type DVKField = (
   DVKDateTimeField
@@ -60,6 +67,7 @@ export type DVKField = (
   | DVKFileField
   | DVKCheckboxField
   | DVKHiddenField
+  | DVKComboBoxField
   ) & {
   infoModal?: { title: string, message: string, buttonProps?: any },
 }
@@ -127,3 +135,21 @@ export type DVKCheckboxField = LabeledField<DVKCheckboxType> & FieldWithErrorMan
 
 export type DVKHiddenType = 'hidden';
 export type DVKHiddenField = BasicField<DVKHiddenType>;
+
+export type DVKComboBoxFieldValue = string | {
+  name: string,
+  label: string,
+} & any
+export type DVKComboBoxType = 'combo-box';
+export type DVKComboBoxField<T extends DVKComboBoxFieldValue = any> =
+  LabeledField<DVKComboBoxType>
+  & FieldWithErrorManagement
+  & {
+  required?: boolean,
+  autoFocus?: boolean,
+  disabled?: boolean,
+  multiple?: boolean,
+  search?: (search: string) => Promise<T[]>,
+  options?: T[],
+  renderOption?: (value: T) => ReactNode,
+}

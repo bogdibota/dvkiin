@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import external from 'rollup-plugin-peer-deps-external';
 
 import pkg from '../package.json';

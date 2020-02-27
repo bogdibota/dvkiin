@@ -17,6 +17,7 @@ import InfoModal from '../Modals/InfoModal';
 import FormContext from './context';
 import { DVKField, DVKFieldMashed, DVKInvalidFields, DVKObject, DVKValue, FieldWithErrorManagement } from './domain';
 import InputCheckbox from './input/Checkbox';
+import InputComboBox from './input/ComboBox';
 import InputDateTime from './input/DateTime';
 import InputDefault from './input/Default';
 import InputFile from './input/File';
@@ -93,23 +94,37 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
 
                                                     InputModal = Fragment, // hack to avoid circular dependencies; better solutions are welcome
                                                   }) => {
-  const [obj, setObj] = useState({ ...defaultValue });
+  const [ obj, setObj ] = useState({ ...defaultValue });
+  const [ innerInvalidFields, setInnerInvalidFields ] = useState<DVKInvalidFields | null>(null);
   const formId = useMemo(() => {
     setObj({ ...defaultValue });
     return uuid();
-  }, [defaultValue]);
+  }, [ defaultValue ]);
 
   const { isOpen: isInfoModalOpen, data: infoModalData, open: openInfoModal, close: closeInfoModal } = useModal();
 
   useEffect(() => {
     onChange(obj);
-  }, [obj, onChange]);
+  }, [ obj, onChange ]);
 
   function handleSubmit(event: React.MouseEvent<HTMLFormElement>) {
     event.preventDefault();
     event.stopPropagation();
+    const requiredFields = fields.filter(it => (it as any).required);
 
-    onSubmit(stripSyntheticIds(obj));
+    const requiredErrors: [ string, DVKValue ][] = requiredFields
+      .map(it => [ it.name, obj[it.name] ] as [ string, DVKValue ])
+      .filter(([ , value ]) => value === null
+        || value === undefined
+        || (value as Array<any>).length === 0,
+      );
+
+    if (requiredErrors.length) {
+      setInnerInvalidFields(requiredErrors.reduce((acc, it) => ({ ...acc, [it[0]]: 'required' }), {}));
+    } else {
+      setInnerInvalidFields(null);
+      onSubmit(stripSyntheticIds(obj));
+    }
   }
 
   const updateProperty = (property: string, type: string) => (event: any) => {
@@ -119,10 +134,11 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
       case 'time':
       case 'date-time':
       case 'image':
-        value = event;
-        break;
       case 'file':
         value = event;
+        break;
+      case 'combo-box':
+        value = event ? event.name || event : null;
         break;
       case 'checkbox':
         value = event.target.checked;
@@ -136,6 +152,10 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
       deepSet(newObject, property, convertValue(value, type));
       return newObject;
     });
+
+    if (innerInvalidFields && innerInvalidFields[property]) {
+      setInnerInvalidFields(oldInvalidFields => ({ ...oldInvalidFields, [property]: false }));
+    }
   };
 
   const updatePropertyF = (property: string, update: (value: DVKValue) => DVKValue) => {
@@ -144,10 +164,17 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
       deepSet(newObject, property, update(oldObj[property]));
       return newObject;
     });
+
+    if (innerInvalidFields && innerInvalidFields[property]) {
+      setInnerInvalidFields(oldInvalidFields => ({ ...oldInvalidFields, [property]: false }));
+    }
   };
 
   function getErrorMessage(errorMessageCode: string | any, errorMessage: FieldWithErrorManagement['errorMessage']) {
     if (!errorMessageCode) return;
+    if (errorMessageCode === 'required' && !(errorMessage && errorMessage['required'])) {
+      return 'Please fill out this field';
+    }
 
     if (typeof errorMessage === 'string') return errorMessage;
     const code = typeof errorMessageCode === 'string' ? errorMessageCode : 'default';
@@ -177,8 +204,11 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
 
                               // checkbox
                               text, checkboxProps,
+
+                              // combo-box
+                              options, renderOption, search,
                             }: DVKFieldMashed): ReactNode {
-    const errorMessageCode = (invalidFields && invalidFields[name]);
+    const errorMessageCode = (innerInvalidFields && innerInvalidFields[name]) || (invalidFields && invalidFields[name]);
     const message = getErrorMessage(errorMessageCode, errorMessage);
 
     const commonProps = {
@@ -255,6 +285,20 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
         />;
       case 'hidden':
         return <InputHidden { ...commonProps }/>;
+      case 'combo-box':
+        return <InputComboBox
+          { ...commonProps }
+
+          multiple={ multiple }
+          required={ required }
+          autoFocus={ autoFocus }
+          disabled={ disabled }
+          options={ options }
+          renderOption={ renderOption }
+          search={ search }
+
+          { ...errorProps }
+        />;
       default:
         return <InputDefault
           { ...commonProps }
