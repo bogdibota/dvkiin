@@ -49,9 +49,9 @@ const InputSelect: FunctionComponent<DVKSelectField & PropsWithErrorManagement> 
         if (typeof value === 'string') return <MenuItem key={ value } value={ value }>{ value }</MenuItem>;
         return <MenuItem key={ value.name } value={ value.name }>{ value.label }</MenuItem>;
       }) }
-
-      { message && <FormHelperText>{ message }</FormHelperText> }
     </Select>
+
+    { message && <FormHelperText>{ message }</FormHelperText> }
   </FormControl>;
 };
 

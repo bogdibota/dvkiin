@@ -30,15 +30,15 @@ export function deepSet(obj: any, property: string, value: any): any {
   }
 }
 
-export function d(value: any): any {
+export function d(value: any, marker: string = ' '): any {
   if (typeof value === 'function') {
     return function (...args: any[]): any {
       const res = value(...args);
-      console.log(args, res);
+      console.log(marker, args, res);
       return res;
     };
   } else {
-    console.log(value);
+    console.log(marker, value);
     return value;
   }
 }

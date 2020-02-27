@@ -13,6 +13,7 @@ import React, {
 
 import { deepSet, useModal, uuid } from '../../lib';
 import InfoModal from '../Modals/InfoModal';
+import { InputModalProps } from '../Modals/InputModal';
 
 import FormContext from './context';
 import { DVKField, DVKFieldMashed, DVKInvalidFields, DVKObject, DVKValue, FieldWithErrorManagement } from './domain';
@@ -39,7 +40,7 @@ export type DVKFormProps = {
   onSubmit?: (obj: DVKObject) => void,
   onChange?: (obj: DVKObject) => void,
   invalidFields?: DVKInvalidFields | null,
-  InputModal?: ComponentType,
+  InputModal?: ComponentType<InputModalProps>,
 };
 
 function convertValue(value: DVKValue, type: string): any {
@@ -54,12 +55,12 @@ function convertValue(value: DVKValue, type: string): any {
 function strip(value: any) {
   const newObj = { ...value };
   delete newObj.__typename;
-  delete newObj.synteticId;
+  delete newObj.syntheticId;
   return newObj;
 }
 
 function needsStripping(value: any): boolean {
-  return value.synteticId || value.__typename;
+  return value.syntheticId || value.__typename;
 }
 
 // TODO deep check
