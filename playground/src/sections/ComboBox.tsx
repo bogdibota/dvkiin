@@ -25,6 +25,16 @@ async function fakeApiCallWithObjects(search: string): Promise<DVKComboBoxFieldV
   ].filter(it => it.label.toLowerCase().indexOf(search.toLowerCase()) > -1);
 }
 
+async function fakeApiCallWithDifferentObjects(search: string): Promise<DVKComboBoxFieldValue[]> {
+  await wait(2e3);
+  return [
+    { field1: 'Zebra', field2: 'White' },
+    { field1: 'Cat', field2: 'Brown' },
+    { field1: 'Car', field2: 'Red' },
+    { field1: 'Microwave', field2: 'Black' },
+  ].filter(it => it.field1.toLowerCase().indexOf(search.toLowerCase()) > -1 || it.field2.toLowerCase().indexOf(search.toLowerCase()) > -1);
+}
+
 const ComboBoxSection: FC = () => {
   const { card, pre } = useStyles();
 
@@ -88,7 +98,14 @@ const ComboBoxSection: FC = () => {
             name: 'object-async',
             label: 'With async objects',
             type: 'combo-box',
-            search: fakeApiCallWithObjects,
+            search: (search) =>
+              fakeApiCallWithDifferentObjects(search).then((objects) =>
+                objects.map((object) => ({
+                  name: object.field1,
+                  label: object.field2,
+                  data: object,
+                }))),
+
           },
           {
             name: 'preselected-simple-async',
