@@ -47,11 +47,11 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
 
   const multipleValue = (lett(
     deepGet(obj, name, null),
-    (names: string[]) => options.filter(opt => names.includes(opt.name || opt)),
+    (names: string[]) => search ? options : options.filter(opt => names.includes(opt.name || opt)),
   ) || []);
   const simpleValue = (lett(
     deepGet(obj, name, null),
-    name => options.find(opt => name === (opt.name || opt)),
+    name => search ? options : options.find(opt => name === (opt.name || opt)),
   ) || null);
 
   useEffect(() => {
