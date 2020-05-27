@@ -8,7 +8,7 @@ import { debounce, deepGet, lett } from '../../../lib';
 
 import FormContext from '../context';
 import { DVKComboBoxField, DVKComboBoxFieldValue, PropsWithErrorManagement } from '../domain';
-
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 function filterDuplicates(options: DVKComboBoxFieldValue[]): DVKComboBoxFieldValue[] {
   const uniqueSet = new Set<string>();
   return options.filter(option => {
@@ -47,11 +47,11 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
 
   const multipleValue = (lett(
     deepGet(obj, name, null),
-    (names: string[]) => search ? options : options.filter(opt => names.includes(opt.name || opt)),
+    (names: string[]) => options.filter(opt => names.includes(opt.name || opt)),
   ) || []);
   const simpleValue = (lett(
     deepGet(obj, name, null),
-    name => search ? options : options.find(opt => name === (opt.name || opt)),
+    name => options.find(opt => name === (opt.name || opt)),
   ) || null);
 
   useEffect(() => {
@@ -104,7 +104,8 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
       } }
       options={ options }
       getOptionSelected={ getOptionSelected }
-      getOptionLabel={ (option) => option.label || option }
+      filterOptions = {search ? (options) => options : createFilterOptions()}
+      getOptionLabel={(option) => option.label || option }
       inputValue={ multiple ? inputValue : undefined }
       renderOption={ renderOption }
       renderInput={ params => <TextField

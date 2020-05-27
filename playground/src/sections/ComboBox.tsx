@@ -102,7 +102,7 @@ const ComboBoxSection: FC = () => {
               fakeApiCallWithDifferentObjects(search).then((objects) =>
                 objects.map((object) => ({
                   name: object.field1,
-                  label: object.field2,
+                  label: object.field1,
                   data: object,
                 }))),
 
