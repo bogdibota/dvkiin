@@ -6,6 +6,7 @@ export type DVKValue = string
   | string[]
   | DVKObject
   | DVKListItem[]
+  | File
 
 export type DVKObject = {
   [key: string]: DVKValue
