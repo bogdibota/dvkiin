@@ -39,7 +39,7 @@ export type DVKFormProps = {
   renderActions?: (formId: string) => ReactElement | null,
   onSubmit?: (obj: DVKObject) => void,
   onChange?: (obj: DVKObject) => void,
-  invalidFields?: DVKInvalidFields | null,
+  invalidFields?: DVKInvalidFields | null | undefined,
   InputModal?: ComponentType<InputModalProps>,
 };
 

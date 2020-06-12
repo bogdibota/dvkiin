@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import React, { FC, ReactElement, useCallback } from 'react';
+import React, { FC, ReactElement, ReactNode, useCallback } from 'react';
 
 import DVKForm from '../Form';
 import { DVKField, DVKObject } from '../Form/domain';
@@ -27,7 +27,7 @@ export type InputModalProps = {
   invalidFields?: { [key: string]: boolean | string },
 
   renderActions?: (formId: string) => ReactElement | null,
-
+  bottomContent?: ReactNode,
 };
 
 // these values are used for change detection
@@ -46,6 +46,7 @@ const InputModal: FC<InputModalProps> = ({
                                            invalidFields = {},
                                            saveLabel = 'Create',
                                            renderActions = null,
+                                           bottomContent,
                                          }) => {
   const actualRenderActions = useCallback((formId: string) => {
     if (renderActions) return renderActions(formId);
@@ -58,7 +59,7 @@ const InputModal: FC<InputModalProps> = ({
         { saveLabel }
       </Button>
     </>;
-  }, [onClose, saveLabel, renderActions]);
+  }, [ onClose, saveLabel, renderActions ]);
 
   return (
     <Dialog
@@ -80,6 +81,7 @@ const InputModal: FC<InputModalProps> = ({
         onSubmit={ onCreate }
         onChange={ onChange }
         invalidFields={ invalidFields }
+        bottomContent={ bottomContent }
       >{ children }</DVKForm>
     </Dialog>
   );

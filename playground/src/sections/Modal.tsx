@@ -1,4 +1,6 @@
 import {
+  ConfirmationModal,
+  ErrorModal,
   FlexExpander,
   InfoModal,
   InputModal,
@@ -8,7 +10,7 @@ import {
 } from '@dvkiin/material-commons';
 import { Button, Divider, Paper, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import useStyles from '../styles';
 
@@ -20,15 +22,20 @@ export default function ModalSection() {
   const { isOpen: isCustomInputModalOpen, open: openCustomInputModal, close: closeCustomInputModal } = useModal();
   const { isOpen: isInfoModalOpen, open: openInfoModal, close: closeInfoModal } = useModal();
   const { isOpen: isComplexInfoModalOpen, open: openComplexInfoModal, close: closeComplexInfoModal } = useModal();
+  const { isOpen: isConfirmationModalOpen, open: openConfirmationModal, close: closeConfirmationModal } = useModal();
+  const { isOpen: isComplexConfirmationModalOpen, open: openComplexConfirmationModal, close: closeComplexConfirmationModal } = useModal();
 
-  const [snackbarKey, triggerSnackbar] = useIncrementalKey();
+  const [ error, setError ] = useState<any>(undefined);
+  const [ error2, setError2 ] = useState<any>(undefined);
+
+  const [ snackbarKey, triggerSnackbar ] = useIncrementalKey();
   const snackbarRef = useRef<SuccessSnackbar>(null);
 
   console.log('Render called');
 
   useEffect(() => {
     console.log('I wanna be called once');
-  }, [openInfoModal]);
+  }, [ openInfoModal ]);
 
 
   return <div className={ container }>
@@ -45,7 +52,10 @@ export default function ModalSection() {
         ] }
         onClose={ closeInputModal }
         onCreate={ console.log }
-      />
+        bottomContent={ <>Content below</> }
+      >
+        Content above
+      </InputModal>
     </Paper>
 
     <Paper className={ card }>
@@ -102,21 +112,69 @@ export default function ModalSection() {
     </Paper>
 
     <Paper className={ card }>
+      <Typography>Error modal</Typography>
+      <Button onClick={ setError }>Show error modal</Button>
+      <ErrorModal
+        message="i am error"
+        error={ error }
+      />
+      <Divider/>
+      <Button onClick={ setError2 }>Show complex error modal</Button>
+      <ErrorModal
+        message={ <>
+          <p>first paragraph</p>
+          <p style={ { color: 'rebeccapurple' } }>second red paragraph</p>
+        </> }
+        error={ error2 }
+      />
+    </Paper>
+
+    <Paper className={ card }>
+      <Typography>Confirmation modal</Typography>
+      <Button onClick={ openConfirmationModal }>Show confirmation modal</Button>
+      <ConfirmationModal
+        message="are you sure?"
+        title="plz confirm"
+        open={ isConfirmationModalOpen }
+        onAccept={ () => {
+          closeConfirmationModal();
+          alert('confirmed');
+        } }
+        onCancel={ closeConfirmationModal }
+      />
+      <Divider/>
+      <Button onClick={ openComplexConfirmationModal }>Show complex confirmation modal</Button>
+      <ConfirmationModal
+        message="are you sure?"
+        title="plz confirm"
+        open={ isComplexConfirmationModalOpen }
+        onAccept={ () => {
+          closeComplexConfirmationModal();
+          alert('confirmed');
+        } }
+        onCancel={ closeComplexConfirmationModal }
+      >
+        <p>more details here</p>
+        <p style={ { color: 'red' } }>more red details here</p>
+      </ConfirmationModal>
+    </Paper>
+
+    <Paper className={ card }>
       <Typography>Snackbar</Typography>
       <Button color='primary' onClick={ triggerSnackbar }>Show success snackbar</Button>
       { (snackbarKey && <SuccessSnackbar
-          key={ snackbarKey }
-          ref={ snackbarRef }
-          message={ <Typography variant="subtitle1" className={ verticalCenter }>
-            <AddIcon className={ gutterRight }/>
-            Le magic snackbar
-          </Typography>
-          }
-          action={
-            <Button color="inherit" size="small" onClick={ () => snackbarRef.current!.handleClose() }>
-              Close me
-            </Button>
-          }
+        key={ snackbarKey }
+        ref={ snackbarRef }
+        message={ <Typography variant="subtitle1" className={ verticalCenter }>
+          <AddIcon className={ gutterRight }/>
+          Le magic snackbar
+        </Typography>
+        }
+        action={
+          <Button color="inherit" size="small" onClick={ () => snackbarRef.current!.handleClose() }>
+            Close me
+          </Button>
+        }
       />) || null }
     </Paper>
   </div>;

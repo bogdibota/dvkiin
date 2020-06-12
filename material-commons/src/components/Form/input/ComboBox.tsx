@@ -1,14 +1,14 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import React, { ChangeEvent, FunctionComponent, useContext, useEffect, useMemo, useState } from 'react';
 
 import { debounce, deepGet, lett } from '../../../lib';
 
 import FormContext from '../context';
 import { DVKComboBoxField, DVKComboBoxFieldValue, PropsWithErrorManagement } from '../domain';
-import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+
 function filterDuplicates(options: DVKComboBoxFieldValue[]): DVKComboBoxFieldValue[] {
   const uniqueSet = new Set<string>();
   return options.filter(option => {
@@ -45,14 +45,14 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
 
   const getOptionSelected = (option: DVKComboBoxFieldValue, value: DVKComboBoxFieldValue) => option.name ? option.name === value.name : option === value;
 
-  const multipleValue = (lett(
-    deepGet(obj, name, null),
-    (names: string[]) => options.filter(opt => names.includes(opt.name || opt)),
-  ) || []);
-  const simpleValue = (lett(
+  const multipleValue = multiple ? (lett(
+    deepGet(obj, name, []),
+    (names: string[]) => names.map(name => options.find(opt => opt.name === name || opt === name)),
+  ) || []) : undefined;
+  const simpleValue = !multiple ? (lett(
     deepGet(obj, name, null),
     name => options.find(opt => name === (opt.name || opt)),
-  ) || null);
+  ) || null) : undefined;
 
   useEffect(() => {
     let active = true;
@@ -67,7 +67,7 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
       if (active) {
         setOptions(multiple
           ? (oldOptions) => filterDuplicates([
-            ...oldOptions.filter(option => !!multipleValue.find(value => getOptionSelected(option, value))),
+            ...oldOptions.filter(option => !!multipleValue!.find(value => getOptionSelected(option, value))),
             ...results,
           ])
           : results,
@@ -104,8 +104,8 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
       } }
       options={ options }
       getOptionSelected={ getOptionSelected }
-      filterOptions = {search ? (options) => options : createFilterOptions()}
-      getOptionLabel={(option) => option.label || option }
+      filterOptions={ search ? (options) => options : createFilterOptions() }
+      getOptionLabel={ (option) => option.label || option }
       inputValue={ multiple ? inputValue : undefined }
       renderOption={ renderOption }
       renderInput={ params => <TextField

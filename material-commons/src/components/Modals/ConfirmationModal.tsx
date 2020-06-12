@@ -17,7 +17,7 @@ export type ConfirmationModalProps = {
   onAccept: () => void
 }
 
-const ConfirmationModal: FC<ConfirmationModalProps> = ({ open, message, title, onCancel, onAccept }) => {
+const ConfirmationModal: FC<ConfirmationModalProps> = ({ open, message, title, onCancel, onAccept, children }) => {
   const renderActions = () => <Fragment>
     <Button onClick={ onCancel }>
       Cancel
@@ -40,6 +40,7 @@ const ConfirmationModal: FC<ConfirmationModalProps> = ({ open, message, title, o
       <DialogTitle id="confirmation-dialog-title">{ title }</DialogTitle>
       <DialogContent>
         <DialogContentText id="confirmation-dialog-description">{ message }</DialogContentText>
+        { children }
       </DialogContent>
       <DialogActions>{ renderActions() }</DialogActions>
     </Dialog>
