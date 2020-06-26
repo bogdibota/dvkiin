@@ -189,7 +189,6 @@ const ComboBoxSection: FC = () => {
             label: 'Preselected with async strings',
             type: 'combo-box',
             multiple: true,
-            options: [ 'Option 1' ],
             search: fakeApiCall,
           },
           {
@@ -197,7 +196,6 @@ const ComboBoxSection: FC = () => {
             label: 'Preselected with async objects',
             type: 'combo-box',
             multiple: true,
-            options: [ { name: 'opt2', label: 'Option 2' } ],
             search: fakeApiCallWithObjects,
           },
         ] }

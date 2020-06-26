@@ -43,16 +43,23 @@ const InputComboBox: FunctionComponent<DVKComboBoxField & PropsWithErrorManageme
     search(input).then(callback);
   }, 200), [ search ]);
 
-  const getOptionSelected = (option: DVKComboBoxFieldValue, value: DVKComboBoxFieldValue) => option.name ? option.name === value.name : option === value;
+  const getOptionSelected = (option: DVKComboBoxFieldValue, value: DVKComboBoxFieldValue) => option.name
+    ? option.name === value.name
+    : option === value;
 
-  const multipleValue = multiple ? (lett(
-    deepGet(obj, name, []),
-    (names: string[]) => names.map(name => options.find(opt => opt.name === name || opt === name)),
-  ) || []) : undefined;
-  const simpleValue = !multiple ? (lett(
-    deepGet(obj, name, null),
-    name => options.find(opt => name === (opt.name || opt)),
-  ) || null) : undefined;
+  const multipleValue = multiple
+    ? (lett(
+      deepGet(obj, name, []),
+      (names: string[]) => names.map(name => options.find(opt => opt.name === name || opt === name)),
+    ) || [])
+      .filter(value => options.some(opt => opt.name === value || opt === value))
+    : undefined;
+  const simpleValue = !multiple
+    ? (lett(
+      deepGet(obj, name, null),
+      name => options.find(opt => name === (opt.name || opt)),
+    ) || null)
+    : undefined;
 
   useEffect(() => {
     let active = true;
