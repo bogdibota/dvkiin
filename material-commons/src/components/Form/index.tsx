@@ -11,7 +11,7 @@ import React, {
   useState,
 } from 'react';
 
-import { deepSet, useModal, uuid } from '../../lib';
+import { deepGet, deepSet, useModal, uuid } from '../../lib';
 import InfoModal from '../Modals/InfoModal';
 import { InputModalProps } from '../Modals/InputModal';
 
@@ -162,7 +162,7 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
   const updatePropertyF = (property: string, update: (value: DVKValue) => DVKValue) => {
     setObj((oldObj: DVKObject) => {
       const newObject = { ...oldObj };
-      deepSet(newObject, property, update(oldObj[property]));
+      deepSet(newObject, property, update(deepGet(oldObj, property)));
       return newObject;
     });
 
@@ -201,7 +201,7 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
                               values,
 
                               // list
-                              fields, editLabel, deleteLabel, deleteMessage,
+                              fields, newLabel, editLabel, deleteLabel, deleteMessage, accordionProps,
 
                               // checkbox
                               text, checkboxProps,
@@ -226,9 +226,12 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
           { ...commonProps }
 
           fields={ fields }
+          newLabel={ newLabel }
           editLabel={ editLabel }
           deleteLabel={ deleteLabel }
           deleteMessage={ deleteMessage }
+          accordionProps={ accordionProps }
+
           InputModal={ InputModal }
         />;
       case 'select':
