@@ -1,3 +1,4 @@
+import { AccordionProps } from '@material-ui/core';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { ReactNode } from 'react';
 
@@ -86,9 +87,11 @@ export type DVKDateTimeField = LabeledField<DVKDateTimeType> & FieldWithErrorMan
 export type DVKListType = 'list';
 export type DVKListField = LabeledField<DVKListType> & {
   fields: DVKField[],
+  newLabel?: string,
   editLabel?: (value: DVKListItem) => string,
   deleteLabel?: (value: DVKListItem) => string,
   deleteMessage?: (value: DVKListItem) => string,
+  accordionProps?: Omit<AccordionProps, 'children'>
 }
 
 export type DVKSelectFieldValue = string | {

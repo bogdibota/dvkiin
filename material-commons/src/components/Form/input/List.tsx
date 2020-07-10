@@ -1,7 +1,7 @@
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Button from '@material-ui/core/Button';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -27,10 +27,12 @@ const InputList: FunctionComponent<InputListProps> = ({
                                                         name,
                                                         label,
 
+                                                        newLabel = `Add new ${ name }`,
                                                         editLabel = ({ id }) => `Edit '${ id }'`,
                                                         deleteLabel = ({ id }) => `Delete '${ id }'`,
                                                         deleteMessage = () => '',
                                                         fields,
+                                                        accordionProps = {},
 
                                                         InputModal,
                                                       }) => {
@@ -51,15 +53,15 @@ const InputList: FunctionComponent<InputListProps> = ({
     return (val1.id && val1.id === val2.id) || (val1.syntheticId && val1.syntheticId === val2.syntheticId);
   }
 
-  return <ExpansionPanel defaultExpanded>
-    <ExpansionPanelSummary
+  return <Accordion defaultExpanded { ...accordionProps }>
+    <AccordionSummary
       expandIcon={ <ExpandMoreIcon/> }
       aria-controls={ `${ name }-content` }
       id={ `${ name }-header` }
     >
       <Typography className={ classes.expansionPanelHeading }>{ label }</Typography>
-    </ExpansionPanelSummary>
-    <ExpansionPanelDetails className={ classes.expansionPanelContent }>
+    </AccordionSummary>
+    <AccordionDetails className={ classes.expansionPanelContent }>
       <Grid container direction="column">
         <Grid item className={ classes.expansionPanelTable }>
           { values.length
@@ -82,9 +84,9 @@ const InputList: FunctionComponent<InputListProps> = ({
           </Button>
         </Grid>
       </Grid>
-    </ExpansionPanelDetails>
+    </AccordionDetails>
     <InputModal
-      title={ `Add new ${ name }` }
+      title={ newLabel }
       formKey={ `${ createKey }` }
       open={ isAddModalOpen }
       fields={ fields }
@@ -124,7 +126,7 @@ const InputList: FunctionComponent<InputListProps> = ({
         closeDeleteModal();
       } }
     />
-  </ExpansionPanel>;
+  </Accordion>;
 };
 
 export default InputList;

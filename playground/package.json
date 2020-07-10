@@ -7,19 +7,19 @@
   "dependencies": {
     "@date-io/moment": "1.3.13",
     "@dvkiin/material-commons": "link:../node_modules/dvkiin-material-commons",
-    "@material-ui/core": "^4.9.4",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.44",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
-    "moment": "^2.24.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "moment": "^2.27.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.22",
-    "@types/react-dom": "^16.9.5",
-    "react-scripts": "3.4.0",
-    "typescript": "3.8.2"
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "react-scripts": "3.4.1",
+    "typescript": "3.9.6"
   },
   "scripts": {
     "start": "react-scripts start",

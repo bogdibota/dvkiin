@@ -16,7 +16,7 @@ const ListFieldSection: FC = () => {
       <DVKForm
         fields={ [
           {
-            name: 'attributes', label: 'Attributes', type: 'list', fields: [
+            name: 'attributes.nested', label: 'Attributes', type: 'list', fields: [
               { name: 'name', label: 'Name', type: 'text', required: true, autoFocus: true },
               {
                 name: 'type', label: 'Type', type: 'select', required: true,
@@ -27,6 +27,10 @@ const ListFieldSection: FC = () => {
               },
               { name: 'unit', label: 'Measuring unit', type: 'text' },
             ],
+            newLabel: 'custom text here',
+            accordionProps: {
+              defaultExpanded: false
+            }
           },
         ] }
         invalidFields={ null }
