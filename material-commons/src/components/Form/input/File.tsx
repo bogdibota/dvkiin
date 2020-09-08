@@ -7,7 +7,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import InputLabel from '@material-ui/core/InputLabel';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import DeleteIcon from '@material-ui/icons/Delete';
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useState, useRef } from 'react';
 
 import { deepGet } from '../../../lib';
 
@@ -29,6 +29,7 @@ const InputFile: FC<DVKFileField & PropsWithErrorManagement> = ({
   const classes = useStyles();
   const [ selectedFileName, setSelectedFileName ] = useState(deepGet(obj, `${ name }.fileName`, ''));
 
+  const inputRef = useRef(null);
   function onFileSelected({ target: { files } }: ChangeEvent<HTMLInputElement>) {
     if (!files) return;
     const listFiles = Array.from(files);
@@ -38,6 +39,9 @@ const InputFile: FC<DVKFileField & PropsWithErrorManagement> = ({
   }
 
   function clearField(e: React.MouseEvent<HTMLButtonElement>) {
+    if (null !== inputRef.current) {
+      (inputRef.current as any).value = ''  // TS is stupid and keeps saying the 
+    }
     e.stopPropagation();
     e.preventDefault();
     setSelectedFileName('');
@@ -52,6 +56,7 @@ const InputFile: FC<DVKFileField & PropsWithErrorManagement> = ({
       type="file"
       onChange={ onFileSelected }
       multiple={ multiple }
+      ref={inputRef}
     />
     <label htmlFor={ `${ name }-hidden` }>
       <FormControl fullWidth margin="dense">
