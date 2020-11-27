@@ -1,0 +1,32 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "setup": "npx lerna bootstrap",
+    "start": "yarn build.packages && lerna run start --parallel",
+    "start.docs": "lerna run start --scope=@dvkiin/docs",
+    "start.no-docs": "yarn build.packages && lerna run start --parallel --scope=@dvkiin/material-commons --scope=@dvkiin/playground",
+    "build": "yarn build.packages && yarn build.docs",
+    "build.packages": "lerna run build --scope=@dvkiin/material-commons",
+    "build.docs": "lerna run build --scope=@dvkiin/docs",
+    "test": "lerna run test --parallel",
+    "check:format": "prettier -c . --config=.prettierrc",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "husky": "^4.2.5",
+    "prettier": "2.0.5",
+    "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}
