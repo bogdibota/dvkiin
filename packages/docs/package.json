@@ -3,7 +3,7 @@
   "private": true,
   "description": "Documentation and examples for @dvkiin/*",
   "author": "Bogdan Bota <bogdan.bota@optioffer.com>",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@emotion/core": "^10.0.15",
