@@ -105,6 +105,15 @@ export default function ModalSection() {
             },
             { name: 'name', label: 'string name', type: 'text' },
             { name: 'email', label: 'string email', type: 'email' },
+            {
+              name: 'contact',
+              label: 'contact',
+              type: 'list',
+              fields: [
+                { name: 'type', label: 'type', type: 'text', required: true },
+                { name: 'value', label: 'value', type: 'text' },
+              ],
+            },
           ]}
           renderActions={(formId: string) => (
             <>
@@ -218,7 +227,7 @@ export default function ModalSection() {
               <Button
                 color="inherit"
                 size="small"
-                onClick={() => snackbarRef.current!.handleClose()}
+                onClick={() => snackbarRef.current?.handleClose()}
               >
                 Close me
               </Button>

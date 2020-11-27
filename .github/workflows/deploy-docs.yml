@@ -19,16 +19,16 @@ jobs:
 
       - run: yarn setup
       - run: yarn build.packages
-      - run: yarn build.docs
+#      - run: yarn build.docs
       - run: npx lerna publish from-git --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
-      - uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          # "gatsby build" creates "public" folder, which is what we are deploying
-          args: deploy --dir=packages/docs/public --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+#      - uses: netlify/actions/cli@master
+#        env:
+#          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#        with:
+#          # "gatsby build" creates "public" folder, which is what we are deploying
+#          args: deploy --dir=packages/docs/public --prod
+#          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
