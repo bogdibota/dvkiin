@@ -114,7 +114,7 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
     const requiredFields = fields.filter(it => (it as any).required);
 
     const requiredErrors: [ string, DVKValue ][] = requiredFields
-      .map(it => [ it.name, obj[it.name] ] as [ string, DVKValue ])
+      .map(it => [ it.name, deepGet(obj, it.name) ] as [ string, DVKValue ])
       .filter(([ , value ]) => value === null
         || value === undefined
         || (value as Array<any>).length === 0,

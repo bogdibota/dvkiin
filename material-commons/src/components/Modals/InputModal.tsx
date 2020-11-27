@@ -82,6 +82,7 @@ const InputModal: FC<InputModalProps> = ({
         onChange={ onChange }
         invalidFields={ invalidFields }
         bottomContent={ bottomContent }
+        InputModal={ InputModal }
       >{ children }</DVKForm>
     </Dialog>
   );
