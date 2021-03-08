@@ -83,6 +83,7 @@ const InputComboBox: FunctionComponent<
         options.some((opt) => opt.name === value || opt === value)
       )
     : undefined;
+
   const simpleValue = !multiple
     ? lett(deepGet(obj, name, null), (name) =>
         options.find((opt) => name === (opt.name || opt))
@@ -100,19 +101,17 @@ const InputComboBox: FunctionComponent<
     debouncedSearch(inputValue, (results: DVKComboBoxFieldValue[]) => {
       setLoading(false);
       if (active) {
-        setOptions(
-          multiple
-            ? (oldOptions) =>
-                filterDuplicates([
-                  ...oldOptions.filter(
-                    (option) =>
-                      !!multipleValue!.find((value) =>
-                        getOptionSelected(option, value)
-                      )
-                  ),
-                  ...results,
-                ])
-            : results
+        setOptions((oldOptions) =>
+          filterDuplicates([
+            ...oldOptions.filter((option) =>
+              multiple
+                ? !!multipleValue!.find((value) =>
+                    getOptionSelected(option, value)
+                  )
+                : simpleValue && getOptionSelected(option, simpleValue)
+            ),
+            ...results,
+          ])
         );
       }
     });
