@@ -18,6 +18,7 @@ const InputDefault: FunctionComponent<
   disabled = false,
   multiline = false,
   autoComplete = name,
+  inputProps = {},
 
   hasError,
   message,
@@ -26,6 +27,10 @@ const InputDefault: FunctionComponent<
 
   return (
     <TextField
+      inputProps={{
+        step: 'any',
+        ...inputProps,
+      }}
       name={name}
       label={label}
       autoFocus={autoFocus}

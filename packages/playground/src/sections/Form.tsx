@@ -126,6 +126,14 @@ const FormSection: FC = () => {
                 title: 'ID TITLE',
               },
             },
+            {
+              type: 'number',
+              name: 'stepNumber',
+              label: 'number with .5 step',
+              inputProps: {
+                step: '.5',
+              },
+            },
             { name: 'hiddenId', type: 'hidden' },
             {
               name: 'name',

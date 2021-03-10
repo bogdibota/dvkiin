@@ -242,6 +242,7 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
     disabled,
     multiline,
     autoComplete,
+    inputProps,
 
     //file
     acceptedFileType,
@@ -377,6 +378,7 @@ const DVKForm: FunctionComponent<DVKFormProps> = ({
             multiline={multiline}
             required={required}
             disabled={disabled}
+            inputProps={inputProps}
             {...errorProps}
           />
         );

@@ -1,4 +1,4 @@
-import { AccordionProps } from '@material-ui/core';
+import { AccordionProps, InputBaseComponentProps } from '@material-ui/core';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { ReactNode } from 'react';
 
@@ -121,6 +121,7 @@ export type DVKDefaultField = LabeledField<DVKDefaultType> &
     disabled?: boolean;
     autoComplete?: string;
     multiline?: boolean;
+    inputProps?: InputBaseComponentProps;
   };
 
 export type DVKImageType = 'image';
